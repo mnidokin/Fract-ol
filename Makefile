@@ -43,32 +43,32 @@ OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJ)
-	@$(COMP) $(FLAG) $(LIB) $(INCLUDES) $(OBJ) -o $(NAME)
+	@ $(COMP) $(FLAG) $(LIB) $(INCLUDES) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR):
-	@mkdir -p $(OBJ_DIR)
+	@ mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADERS)
-	$(COMP) $(FLAG) -c $(INCLUDES) $< -o $@
+	@ $(COMP) $(FLAG) -c $(INCLUDES) $< -o $@
 
 $(LIBFT):
-	@$(MAKE) -sC $(LIBFT_DIR)
+	@ $(MAKE) -sC $(LIBFT_DIR)
 
 $(MLX):
-	@$(MAKE) -sC $(MLX_DIR)
+	@ $(MAKE) -sC $(MLX_DIR)
 
 clean:
-	@$(MAKE) -sC $(LIBFT_DIR) clean
-	@$(MAKE) -sC $(MLX_DIR) clean
-	@rm -rf $(OBJ_DIR)
+	@ $(MAKE) -sC $(LIBFT_DIR) clean
+	@ $(MAKE) -sC $(MLX_DIR) clean
+	@ rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@rm -f $(MLX)
-	@rm -f $(LIBFT)
-	@rm -f $(NAME)
+	@ rm -f $(MLX)
+	@ rm -f $(LIBFT)
+	@ rm -f $(NAME)
 
 re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+	@ $(MAKE) fclean
+	@ $(MAKE) all
 
 .PHONY: all clean fclean re
