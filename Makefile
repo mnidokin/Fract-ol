@@ -24,7 +24,6 @@ SRC_LIST =		ft_abs_float.c \
 				ft_complex.c \
 				ft_draw.c \
 				ft_exit.c \
-				ft_fractol_form.c \
 				ft_fractol_list.c \
 				ft_fractol_struct_init.c \
 				ft_key_handler.c \

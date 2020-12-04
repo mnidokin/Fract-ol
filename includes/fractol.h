@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 04:23:46 by mnidokin          #+#    #+#             */
+/*   Updated: 2020/12/04 04:43:56 by mnidokin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
@@ -6,15 +18,14 @@
 # include <mlx.h>
 # include <stdint.h>
 # include <stdlib.h>
-#include <pthread.h>
+# include <pthread.h>
+
+# define COLOR	2
 
 # define WIDTH		1000
 # define HEIGHT		1000
-
-# define COLOR_SILVER		0xCCCCCC
-# define COLOR_TUNDORA		0x444444
-
-# define THREADS	10
+# define THREADS	20
+# define MAX_ITER  	100
 
 # define ARROW_UP			126
 # define ARROW_DOWN			125
@@ -56,11 +67,11 @@ typedef struct		s_fract
 	t_complex		color_pixel_depen;
 	t_complex		complex_num;
 	t_complex		julia_const;
-	int			julia_flag;
+	int				julia_flag;
 	int				start_line;
 	int				finish_line;
 	int				(*fract_discr_form)(struct s_fract*fractol);
-	int			is_help;
+	int				is_help;
 }					t_fract;
 
 typedef struct		s_fract_discr_form
@@ -73,101 +84,99 @@ typedef struct		s_fract_discr_form
 ** ft_abs_float.c
 */
 
-float	ft_abs_float(float num);
+float				ft_abs_float(float num);
 
 /*
 ** ft_arrow_handler.c
 */
 
-void	ft_arrow_handler(int key, t_fract *fract);
+void				ft_arrow_handler(int key, t_fract *fract);
 
 /*
 ** ft_complex.c
 */
 
-t_complex	ft_complex(double re, double im);
-
-/*
-** ft_fractol_form.c
-*/
-
-int	(*ft_fractol_form(char *name)) (t_fract *fract);
+t_complex			ft_complex(double re, double im);
 
 /*
 ** ft_fractol_list.c
 */
 
-int	ft_mandelbrot(t_fract *fract);
-int	ft_julia(t_fract *fract);
-int	ft_celtic_perpendicular(t_fract *fract);
+int					ft_mandelbrot(t_fract *fract);
+int					ft_julia(t_fract *fract);
+int					ft_celtic_perpendicular(t_fract *fract);
 
 /*
 ** ft_fractol_struct_init.c
 */
 
-t_fract	*ft_fractol_init(void *mlx_ptr, char *fract_name);
-void		ft_fractol_complexnum_def(t_fract *fract);
+t_fract				*ft_fractol_init(void *mlx_ptr, char *fract_name);
+void				ft_fractol_complexnum_def(t_fract *fract);
 
 /*
 ** ft_image.c
 */
 
-t_image	*ft_image(void *mlx);
+t_image				*ft_image(void *mlx);
 
 /*
 ** ft_input_handler.c
 */
 
-int	ft_input_handler(t_fract *fract, char *fract_name);
+int					ft_input_handler(t_fract *fract, char *fract_name);
 
 /*
 ** ft_fractol_handler.c
 */
 
-int	ft_av_fractol_handler(int ac, char **av);
+int					ft_av_fractol_handler(int ac, char **av);
 
 /*
 ** ft_draw.c
 */
 
-int		ft_draw(t_fract *fract);
-void	ft_draw_thread(t_fract *fract);
-int		ft_color_choose(t_fract *fract);
-int		ft_draw_pixel(t_fract *fract, int x, int y, t_color pixel_color);
+int					ft_draw(t_fract *fract);
+void				ft_draw_thread(t_fract *fract);
+int					ft_color_choose(t_fract *fract);
+int					ft_draw_pixel(t_fract *fract, int x, \
+					int y, t_color pixel_color);
+void				ft_thread_set(t_fract **fract_list, \
+					t_fract *fract, int threads_count);
 
 /*
 ** ft_color.c
 */
 
-t_color	ft_color_channel_gen(t_fract *fract, int iter);
+t_color				ft_color_channel_gen(t_fract *fract, int iter);
 
 /*
 **  ft_key_handler.c
 */
 
-int			ft_key_handler(int key, t_fract *fract);
+int					ft_key_handler(int key, t_fract *fract);
 
 /*
 ** ft_scale.c
 */
 
-int				ft_scale(int button, int x, int y, t_fract *fract);
-void			ft_scaling_map(t_fract *fract, t_complex mouse, double scaling_val);
-double			ft_scale_coord(double start, double end, double interpolation);
-double 			ft_set_scale_val(int key);
+int					ft_scale(int button, int x, int y, t_fract *fract);
+void				ft_scaling_map(t_fract *fract, t_complex mouse, \
+					double scaling_val);
+double				ft_scale_coord(double start, double end, \
+					double interpolation);
+double				ft_set_scale_val(int key);
 
 /*
 ** ft_exit.c
 */
 
-int		ft_exit(void *exit_par);
+int					ft_exit(void *exit_par);
+int					ft_exit_help(void);
 
 /*
 ** ft_julia_specific_handler.c
 */
 
-int	ft_julia_specific_handler(t_fract *fract, int x, int y);
-
-int				zoom(int button, int x, int y, t_fract *fractol);
+int					ft_julia_specific_handler(int x, int y, t_fract *fract);
 
 #endif

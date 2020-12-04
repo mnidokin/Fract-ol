@@ -1,19 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_draw.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/04 04:13:12 by mnidokin          #+#    #+#             */
+/*   Updated: 2020/12/04 04:40:48 by mnidokin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int	ft_draw(t_fract *fract)
+int		ft_draw(t_fract *fract)
 {
 	pthread_t	threads[THREADS];
-	t_fract		fract_list[THREADS];
+	t_fract		*fract_list;
 	int			threads_count;
 
+	if (!(fract_list = (t_fract *)malloc(sizeof(t_fract) * THREADS)))
+		exit(1);
 	ft_color_choose(fract);
 	threads_count = 0;
 	while (threads_count < THREADS)
 	{
-		fract_list[threads_count] = *fract;
-		fract_list[threads_count].start_line = threads_count * (HEIGHT / THREADS);
-		fract_list[threads_count].finish_line = (threads_count + 1) * (HEIGHT / THREADS);
-		if (pthread_create(&threads[threads_count], NULL, (void *(*)(void *))ft_draw_thread, (void *)&fract_list[threads_count]))
+		ft_thread_set(&fract_list, fract, threads_count);
+		if (pthread_create(&threads[threads_count], NULL, \
+		(void *(*)(void *))ft_draw_thread, (void *)&fract_list[threads_count]))
 			exit(1);
 		threads_count++;
 	}
@@ -23,8 +36,18 @@ int	ft_draw(t_fract *fract)
 		if (pthread_join(threads[threads_count], NULL))
 			exit(1);
 	}
-	mlx_put_image_to_window(fract->mlx_ptr, fract->window, fract->image->image_mlx, 0, 0);
+	mlx_put_image_to_window(fract->mlx_ptr, \
+	fract->window, fract->image->image_mlx, 0, 0);
 	return (0);
+}
+
+void	ft_thread_set(t_fract **fract_list, t_fract *fract, int threads_count)
+{
+	(*fract_list)[threads_count] = *fract;
+	(*fract_list)[threads_count].start_line = \
+	threads_count * (HEIGHT / THREADS);
+	(*fract_list)[threads_count].finish_line = \
+	(threads_count + 1) * (HEIGHT / THREADS);
 }
 
 void	ft_draw_thread(t_fract *fract)
@@ -40,8 +63,10 @@ void	ft_draw_thread(t_fract *fract)
 		x = 0;
 		while (x < WIDTH)
 		{
-			fract->complex_num.re = fract->min.re + x * fract->color_pixel_depen.re;
-			pixel_color = ft_color_channel_gen(fract, fract->fract_discr_form(fract));
+			fract->complex_num.re = \
+			fract->min.re + x * fract->color_pixel_depen.re;
+			pixel_color = ft_color_channel_gen(fract, \
+			fract->fract_discr_form(fract));
 			ft_draw_pixel(fract, x, y, pixel_color);
 			x++;
 		}
@@ -49,7 +74,7 @@ void	ft_draw_thread(t_fract *fract)
 	}
 }
 
-int	ft_draw_pixel(t_fract *fract, int x, int y, t_color pixel_color)
+int		ft_draw_pixel(t_fract *fract, int x, int y, t_color pixel_color)
 {
 	int	i;
 
@@ -61,7 +86,7 @@ int	ft_draw_pixel(t_fract *fract, int x, int y, t_color pixel_color)
 	return (0);
 }
 
-int	ft_color_choose(t_fract *fract)
+int		ft_color_choose(t_fract *fract)
 {
 	double re_val;
 	double im_val;
