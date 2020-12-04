@@ -6,12 +6,11 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:12:20 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:49:27 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 05:03:27 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <stdio.h>
 
 int		(*ft_fractol_form(char *name)) (t_fract *fract)
 {
