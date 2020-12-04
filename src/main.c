@@ -6,14 +6,14 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:12:20 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:43:24 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:49:27 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include <stdio.h>
 
-int	(*ft_fractol_form(char *name)) (t_fract *fract)
+int		(*ft_fractol_form(char *name)) (t_fract *fract)
 {
 	size_t						iter;
 	int							(*fract_discr_form)(t_fract *fract);
@@ -52,7 +52,7 @@ t_fract	*ft_fractol_init(void *mlx_ptr, char *fract_name)
 	return (fract);
 }
 
-int	main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	if (ac == 2)
 	{
