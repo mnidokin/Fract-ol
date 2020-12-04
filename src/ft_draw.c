@@ -6,7 +6,7 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:13:12 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:40:48 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 04:59:04 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		ft_draw(t_fract *fract)
 	}
 	mlx_put_image_to_window(fract->mlx_ptr, \
 	fract->window, fract->image->image_mlx, 0, 0);
+	free(fract_list);
 	return (0);
 }
 
