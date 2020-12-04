@@ -6,7 +6,7 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:12:57 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:16:08 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:13:57 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_mandelbrot(t_fract *fract)
 
 	iter = 0;
 	z = ft_complex(fract->complex_num.re, fract->complex_num.im);
-	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iteration)
+	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iter)
 	{
 		z = ft_complex(pow(z.re, 2.0) - pow(z.im, 2.0) + \
 		fract->complex_num.re, 2.0 * z.re * z.im + fract->complex_num.im);
@@ -35,7 +35,7 @@ int	ft_julia(t_fract *fract)
 
 	iter = 0;
 	z = ft_complex(fract->complex_num.re, fract->complex_num.im);
-	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iteration)
+	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iter)
 	{
 		z = ft_complex(pow(z.re, 2.0) - pow(z.im, 2.0) + \
 		fract->julia_const.re, 2.0 * z.re * z.im + fract->julia_const.im);
@@ -51,7 +51,7 @@ int	ft_celtic_perpendicular(t_fract *fract)
 
 	iter = 0;
 	z = ft_complex(fract->complex_num.re, fract->complex_num.im);
-	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iteration)
+	while (pow(z.re, 2.0) + pow(z.im, 2.0) <= 4 && iter < fract->max_iter)
 	{
 		z = ft_complex(fabs(pow(z.re, 2.0) - pow(z.im, 2.0)) + \
 		fract->complex_num.re, -2.0 * fabs(z.re) * z.im + \

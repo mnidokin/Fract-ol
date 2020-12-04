@@ -6,7 +6,7 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:12:53 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:36:31 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:13:57 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_fractol_complexnum_def(t_fract *fract)
 {
-	fract->max_iteration = MAX_ITER;
+	fract->max_iter = MAX_ITER;
 	fract->min = ft_complex(-2.0, -2.0);
 	fract->max.re = 2.0;
 	fract->max.im = fract->min.im + \

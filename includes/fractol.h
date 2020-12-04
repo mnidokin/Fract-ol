@@ -6,7 +6,7 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:23:46 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:43:56 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:17:32 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_image
 {
 	void			*image_mlx;
 	char			*data_addr;
-	int				bits_per_pixel;
+	int				bpr;
 	int				size_line;
 	int				endian;
 }					t_image;
@@ -60,18 +60,17 @@ typedef struct		s_fract
 {
 	void			*mlx_ptr;
 	void			*window;
+	int				max_iter;
+	int				julia_flag;
+	int				start;
+	int				finish;
+	int				(*fract_discr_form)(struct s_fract*fractol);
 	t_image			*image;
-	int				max_iteration;
 	t_complex		min;
 	t_complex		max;
 	t_complex		color_pixel_depen;
 	t_complex		complex_num;
 	t_complex		julia_const;
-	int				julia_flag;
-	int				start_line;
-	int				finish_line;
-	int				(*fract_discr_form)(struct s_fract*fractol);
-	int				is_help;
 }					t_fract;
 
 typedef struct		s_fract_discr_form

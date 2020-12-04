@@ -6,7 +6,7 @@
 /*   By: mnidokin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 04:13:19 by mnidokin          #+#    #+#             */
-/*   Updated: 2020/12/04 04:13:19 by mnidokin         ###   ########.fr       */
+/*   Updated: 2020/12/04 12:13:57 by mnidokin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_color	ft_color_channel_gen(t_fract *fract, int iter)
 	t_color	color;
 	double	t;
 
-	t = (double)iter / fract->max_iteration;
+	t = (double)iter / fract->max_iter;
 	color.channel[COLOR] = 0;
 	color.channel[(COLOR) % 3 + 1] =
 		(int8_t)(9 * (1 - t) * pow(t, 3) * 255);
